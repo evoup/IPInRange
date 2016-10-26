@@ -50,6 +50,11 @@ def processIp2(fname, dict):
         for ip in ips:
             inMask2(ip, dict)
 
+def processIp3(fname, dict):
+    with open(fname) as e:
+        for ip in e:
+            inMask2(ip, dict)
+
 
 newdict = convertToNewDict(os.getcwd() + "/dict.txt")
 processIp2(os.getcwd() + "/111.txt", newdict)
