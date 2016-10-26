@@ -60,7 +60,7 @@ def processIp3(fname, dict):
         for ip in e:
             try:
                 count=count+1
-                if count % 5 == 1:
+                if count % 5000 == 1:
                     file_object.write(">>>>>>>>>>>>>>>>>>>>>>line:%d\n" % count)
                 inMask2(ip, dict)
             except  AddrFormatError:
