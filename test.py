@@ -4,6 +4,7 @@ from collections import defaultdict
 
 no_op = 0
 score = defaultdict(int)
+file_object = open(os.getcwd()+'/countLog.txt', 'w')
 
 def loadDict(fname):
     with open(fname) as f:
@@ -53,12 +54,13 @@ def processIp2(fname, dict):
 
 def processIp3(fname, dict):
     count = 0
+    global file_object
     with open(fname) as e:
         for ip in e:
             try:
                 count=count+1
-                if count%5000==1:
-                    print ">>>>>>>>>>>>>>>>>>>>>>line:%s" , count
+                if count%5==1:
+                    file_object.write(">>>>>>>>>>>>>>>>>>>>>>line:%d\n" % count)
                 inMask2(ip, dict)
             except  AddrFormatError:
                 no_op
@@ -69,6 +71,8 @@ def processIp3(fname, dict):
 newdict = convertToNewDict(os.getcwd() + "/dict.txt")
 processIp3(os.getcwd() + "/111.txt", newdict)
 
-print score.items()
-
-print "done"
+#print score.items()
+file_object.write("%s\n" % score.items())
+#print "done"
+file_object.write("done\n")
+file_object.close()
