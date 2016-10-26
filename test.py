@@ -57,7 +57,7 @@ def processIp3(fname, dict):
 
 
 newdict = convertToNewDict(os.getcwd() + "/dict.txt")
-processIp2(os.getcwd() + "/111.txt", newdict)
+processIp3(os.getcwd() + "/111.txt", newdict)
 
 print score.items()
 
