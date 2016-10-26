@@ -1,7 +1,8 @@
-from netaddr import IPNetwork, IPAddress
+from netaddr import IPNetwork, IPAddress, AddrFormatError
 import os
 from collections import defaultdict
 
+no_op = 0
 score = defaultdict(int)
 
 def loadDict(fname):
@@ -53,7 +54,12 @@ def processIp2(fname, dict):
 def processIp3(fname, dict):
     with open(fname) as e:
         for ip in e:
-            inMask2(ip, dict)
+            try:
+                inMask2(ip, dict)
+            except  AddrFormatError:
+                no_op
+            else:
+                no_op
 
 
 newdict = convertToNewDict(os.getcwd() + "/dict.txt")
