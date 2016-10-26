@@ -52,9 +52,13 @@ def processIp2(fname, dict):
             inMask2(ip, dict)
 
 def processIp3(fname, dict):
+    count = 0
     with open(fname) as e:
         for ip in e:
             try:
+                count=count+1
+                if count%5000==1:
+                    print ">>>>>>>>>>>>>>>>>>>>>>line:%s" , count
                 inMask2(ip, dict)
             except  AddrFormatError:
                 no_op
