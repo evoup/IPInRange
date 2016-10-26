@@ -4,7 +4,7 @@ from netaddr import IPNetwork, IPAddress, AddrFormatError
 
 no_op = 0
 score = defaultdict(int)
-file_object = open(os.getcwd()+'/countLog.txt', 'w')
+file_object = open(os.getcwd() + '/countLog.txt', 'w+')
 
 def loadDict(fname):
     with open(fname) as f:
@@ -31,7 +31,7 @@ def inMask2(queryIp, newDict):
         end = element[2]
         if (qip >= start):
             if (qip <= end):
-                print qip0 + " is in " + ipnetwork
+                file_object.write(qip0 + " is in " + ipnetwork + "\n")
                 makeScore2(ipnetwork)
 
 def makeScore(key):
@@ -52,6 +52,7 @@ def processIp2(fname, dict):
         for ip in ips:
             inMask2(ip, dict)
 
+
 def processIp3(fname, dict):
     count = 0
     global file_object
@@ -59,7 +60,7 @@ def processIp3(fname, dict):
         for ip in e:
             try:
                 count=count+1
-                if count % 5000 == 1:
+                if count % 5 == 1:
                     file_object.write(">>>>>>>>>>>>>>>>>>>>>>line:%d\n" % count)
                 inMask2(ip, dict)
             except  AddrFormatError:
@@ -71,8 +72,7 @@ def processIp3(fname, dict):
 newdict = convertToNewDict(os.getcwd() + "/dict.txt")
 processIp3(os.getcwd() + "/111.txt", newdict)
 
-#print score.items()
 file_object.write("%s\n" % score.items())
-#print "done"
+
 file_object.write("done\n")
 file_object.close()
